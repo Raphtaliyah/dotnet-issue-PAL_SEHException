@@ -151,16 +151,12 @@ static constexpr auto RUNTIME_CFG_PATH = "Lib/bin/Release/Lib.runtimeconfig.json
 static constexpr auto ASSEMBLY_PATH = "Lib/bin/Release/Lib.dll";
 static constexpr auto RUNTIME_PATH = "runtime"; // can be empty to use system installed runtime.
 
-void TestCppFunc()
-{
-}
-
 int main()
 {
     Load(RUNTIME_PATH, RUNTIME_CFG_PATH);
     LoadAssembly(ASSEMBLY_PATH);
 
-    auto fptr = GetFunctionPointer<void(void (*)())>("Namespace.Entry, Lib", "Initialize");
+    auto fptr = GetFunctionPointer<void()>("Namespace.Entry, Lib", "Initialize");
     assert(fptr != nullptr);
-    fptr(&TestCppFunc);
+    fptr();
 }
